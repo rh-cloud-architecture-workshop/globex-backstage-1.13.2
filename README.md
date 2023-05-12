@@ -3,62 +3,16 @@
 # [Backstage](https://backstage.io)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![CNCF Status](https://img.shields.io/badge/cncf%20status-incubation-blue.svg)](https://www.cncf.io/projects)
-[![Main CI Build](https://github.com/backstage/backstage/workflows/Main%20Master%20Build/badge.svg)](https://github.com/backstage/backstage/actions?query=workflow%3A%22Main+Master+Build%22)
-[![Discord](https://img.shields.io/discord/687207715902193673)](https://discord.gg/backstage-687207715902193673)
-![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
-[![Codecov](https://img.shields.io/codecov/c/github/backstage/backstage)](https://codecov.io/gh/backstage/backstage)
-[![](https://img.shields.io/github/v/release/backstage/backstage)](https://github.com/backstage/backstage/releases)
 
-## What is Backstage?
+## This is NOT the official Backstage repo (as you might have guessed from the repo hierarchy, just saying...)
 
-[Backstage](https://backstage.io/) is an open platform for building developer portals. Powered by a centralized software catalog, Backstage restores order to your microservices and infrastructure and enables your product teams to ship high-quality code quickly without compromising autonomy.
+This repo is a snapshot of the 1.13.2 version, used for development and debugging/tracing.
 
-Backstage unifies all your infrastructure tooling, services, and documentation to create a streamlined development environment from end to end.
+==**Tip**== (learned the hard way :weary:, so here to share) - if you are developing more than a boilerplate Backstage for your own needs, fork the [Backstage Repo](https://github.com/backstage/backstage) or, as we did, take a [release version](https://github.com/backstage/backstage/releases) and build from there.
 
-![software-catalog](docs/assets/header.png)
+If you have created your backstage app using `npx @backstage/create-app` the corresponding minified dirty code will be present in your repository somewhere under `node_modules/@backstage/<module>/dist/cjs/<somethingsomething>-xxxx.cjs.js` and it is alomst impossible to debug/trace/inspect (or read) this.
 
-Out of the box, Backstage includes:
 
-- [Backstage Software Catalog](https://backstage.io/docs/features/software-catalog/) for managing all your software such as microservices, libraries, data pipelines, websites, and ML models
-- [Backstage Software Templates](https://backstage.io/docs/features/software-templates/) for quickly spinning up new projects and standardizing your tooling with your organization’s best practices
-- [Backstage TechDocs](https://backstage.io/docs/features/techdocs/) for making it easy to create, maintain, find, and use technical documentation, using a "docs like code" approach
-- Plus, a growing ecosystem of [open source plugins](https://github.com/backstage/backstage/tree/master/plugins) that further expand Backstage’s customizability and functionality
-
-Backstage was created by Spotify but is now hosted by the [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io) as an Incubation level project. For more information, see the [announcement](https://backstage.io/blog/2022/03/16/backstage-turns-two#out-of-the-sandbox-and-into-incubation).
-
-## Project roadmap
-
-For information about the detailed project roadmap including delivered milestones, see [the Roadmap](https://backstage.io/docs/overview/roadmap).
-
-## Getting Started
-
-To start using Backstage, see the [Getting Started documentation](https://backstage.io/docs/getting-started).
-
-## Documentation
-
-The documentation of Backstage includes:
-
-- [Main documentation](https://backstage.io/docs)
-- [Software Catalog](https://backstage.io/docs/features/software-catalog/)
-- [Architecture](https://backstage.io/docs/overview/architecture-overview) ([Decisions](https://backstage.io/docs/architecture-decisions/))
-- [Designing for Backstage](https://backstage.io/docs/dls/design)
-- [Storybook - UI components](https://backstage.io/storybook)
-
-## Community
-
-To engage with our community, you can use the following resources:
-
-- [Discord chatroom](https://discord.gg/backstage-687207715902193673) - Get support or discuss the project
-- [Contributing to Backstage](https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md) - Start here if you want to contribute
-- [RFCs](https://github.com/backstage/backstage/labels/rfc) - Help shape the technical direction
-- [FAQ](https://backstage.io/docs/FAQ) - Frequently Asked Questions
-- [Code of Conduct](CODE_OF_CONDUCT.md) - This is how we roll
-- [Adopters](ADOPTERS.md) - Companies already using Backstage
-- [Blog](https://backstage.io/blog/) - Announcements and updates
-- [Newsletter](https://spoti.fi/backstagenewsletter) - Subscribe to our email newsletter
-- [Backstage Community Sessions](https://github.com/backstage/community) - Join monthly meetups and explore Backstage community
-- Give us a star ⭐️ - If you are using Backstage or think it is an interesting project, we would love a star ❤️
 
 ## License
 
