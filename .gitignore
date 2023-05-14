@@ -156,3 +156,6 @@ tsconfig.tmp.json
 # Lighthouse CI Reports
 **/.lighthouseci/*
 !**/.lighthouseci/scripts
+
+# my own secrets
+environment-secrets.txt

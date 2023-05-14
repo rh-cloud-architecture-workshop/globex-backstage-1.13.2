@@ -15,7 +15,7 @@
  */
 
 import {
-  Entity,
+  //Entity,
   RELATION_API_CONSUMED_BY,
   RELATION_API_PROVIDED_BY,
   RELATION_CONSUMES_API,
@@ -34,13 +34,7 @@ import {
   EntityProvidedApisCard,
   EntityProvidingComponentsCard,
 } from '@backstage/plugin-api-docs';
-import {
-  EntityAzurePipelinesContent,
-  EntityAzureGitTagsContent,
-  EntityAzurePullRequestsContent,
-  isAzureDevOpsAvailable,
-  isAzurePipelinesAvailable,
-} from '@backstage/plugin-azure-devops';
+
 import { EntityBadgesDialog } from '@backstage/plugin-badges';
 import {
   EntityAboutCard,
@@ -66,41 +60,24 @@ import {
   Direction,
   EntityCatalogGraphCard,
 } from '@backstage/plugin-catalog-graph';
-import {
-  EntityCircleCIContent,
-  isCircleCIAvailable,
-} from '@backstage/plugin-circleci';
+
 import {
   EntityCloudbuildContent,
   isCloudbuildAvailable,
 } from '@backstage/plugin-cloudbuild';
-import { EntityCodeCoverageContent } from '@backstage/plugin-code-coverage';
-import {
-  DynatraceTab,
-  isDynatraceAvailable,
-} from '@backstage/plugin-dynatrace';
+
+
 import {
   EntityFeedbackResponseContent,
   EntityLikeDislikeRatingsCard,
   LikeDislikeButtons,
 } from '@backstage/plugin-entity-feedback';
-import {
-  EntityGithubActionsContent,
-  EntityRecentGithubActionsRunsCard,
-  isGithubActionsAvailable,
-} from '@backstage/plugin-github-actions';
-import {
-  EntityJenkinsContent,
-  EntityLatestJenkinsRunCard,
-  isJenkinsAvailable,
-} from '@backstage/plugin-jenkins';
+
+
+
 import { EntityKafkaContent } from '@backstage/plugin-kafka';
 import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
-import {
-  EntityLastLighthouseAuditCard,
-  EntityLighthouseContent,
-  isLighthouseAvailable,
-} from '@backstage/plugin-lighthouse';
+
 import {
   EntityGroupProfileCard,
   EntityMembersListCard,
@@ -112,12 +89,8 @@ import {
   isPagerDutyAvailable,
 } from '@backstage/plugin-pagerduty';
 import { EntityPlaylistDialog } from '@backstage/plugin-playlist';
-import {
-  EntityRollbarContent,
-  isRollbarAvailable,
-} from '@backstage/plugin-rollbar';
-import { PuppetDbPage, isPuppetDbAvailable } from '@backstage/plugin-puppetdb';
-import { EntitySentryContent } from '@backstage/plugin-sentry';
+
+
 import { EntityTechdocsContent } from '@backstage/plugin-techdocs';
 import { EntityTechInsightsScorecardCard } from '@backstage/plugin-tech-insights';
 import { EntityTodoContent } from '@backstage/plugin-todo';
@@ -125,32 +98,10 @@ import { Button, Grid } from '@material-ui/core';
 import BadgeIcon from '@material-ui/icons/CallToAction';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
-import {
-  EntityGithubInsightsContent,
-  EntityGithubInsightsLanguagesCard,
-  EntityGithubInsightsReadmeCard,
-  EntityGithubInsightsReleasesCard,
-  isGithubInsightsAvailable,
-} from '@roadiehq/backstage-plugin-github-insights';
-import {
-  EntityGithubPullRequestsContent,
-  EntityGithubPullRequestsOverviewCard,
-  isGithubPullRequestsAvailable,
-} from '@roadiehq/backstage-plugin-github-pull-requests';
-import {
-  EntityTravisCIContent,
-  EntityTravisCIOverviewCard,
-  isTravisciAvailable,
-} from '@roadiehq/backstage-plugin-travis-ci';
-import {
-  EntityBuildkiteContent,
-  isBuildkiteAvailable,
-} from '@roadiehq/backstage-plugin-buildkite';
-import {
-  isNewRelicDashboardAvailable,
-  EntityNewRelicDashboardContent,
-  EntityNewRelicDashboardCard,
-} from '@backstage/plugin-newrelic-dashboard';
+
+
+
+
 import { EntityGoCdContent, isGoCdAvailable } from '@backstage/plugin-gocd';
 import { EntityScoreCardContent } from '@oriflame/backstage-plugin-score-card';
 
@@ -230,37 +181,25 @@ const techdocsContent = (
 
 export const cicdContent = (
   <EntitySwitch>
-    <EntitySwitch.Case if={isJenkinsAvailable}>
-      <EntityJenkinsContent />
-    </EntitySwitch.Case>
+    
 
-    <EntitySwitch.Case if={isBuildkiteAvailable}>
-      <EntityBuildkiteContent />
-    </EntitySwitch.Case>
+    
 
-    <EntitySwitch.Case if={isCircleCIAvailable}>
-      <EntityCircleCIContent />
-    </EntitySwitch.Case>
+    
 
     <EntitySwitch.Case if={isCloudbuildAvailable}>
       <EntityCloudbuildContent />
     </EntitySwitch.Case>
 
-    <EntitySwitch.Case if={isTravisciAvailable}>
-      <EntityTravisCIContent />
-    </EntitySwitch.Case>
+
 
     <EntitySwitch.Case if={isGoCdAvailable}>
       <EntityGoCdContent />
     </EntitySwitch.Case>
 
-    <EntitySwitch.Case if={isGithubActionsAvailable}>
-      <EntityGithubActionsContent />
-    </EntitySwitch.Case>
 
-    <EntitySwitch.Case if={isAzurePipelinesAvailable}>
-      <EntityAzurePipelinesContent defaultLimit={25} />
-    </EntitySwitch.Case>
+
+
 
     <EntitySwitch.Case>
       <EmptyState
@@ -283,23 +222,11 @@ export const cicdContent = (
 
 const cicdCard = (
   <EntitySwitch>
-    <EntitySwitch.Case if={isJenkinsAvailable}>
-      <Grid item sm={6}>
-        <EntityLatestJenkinsRunCard branch="master" variant="gridItem" />
-      </Grid>
-    </EntitySwitch.Case>
+ 
 
-    <EntitySwitch.Case if={isTravisciAvailable as (e: Entity) => boolean}>
-      <Grid item sm={6}>
-        <EntityTravisCIOverviewCard />
-      </Grid>
-    </EntitySwitch.Case>
 
-    <EntitySwitch.Case if={isGithubActionsAvailable}>
-      <Grid item sm={6}>
-        <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
-      </Grid>
-    </EntitySwitch.Case>
+
+    
   </EntitySwitch>
 );
 
@@ -325,25 +252,15 @@ const entityWarningContent = (
 
 const errorsContent = (
   <EntitySwitch>
-    <EntitySwitch.Case if={isRollbarAvailable}>
-      <EntityRollbarContent />
-    </EntitySwitch.Case>
 
-    <EntitySwitch.Case>
-      <EntitySentryContent />
-    </EntitySwitch.Case>
+
+   
   </EntitySwitch>
 );
 
 const pullRequestsContent = (
   <EntitySwitch>
-    <EntitySwitch.Case if={isAzureDevOpsAvailable}>
-      <EntityAzurePullRequestsContent defaultLimit={25} />
-    </EntitySwitch.Case>
-
-    <EntitySwitch.Case>
-      <EntityGithubPullRequestsContent />
-    </EntitySwitch.Case>
+    
   </EntitySwitch>
 );
 
@@ -367,11 +284,7 @@ const overviewContent = (
     </EntitySwitch>
 
     <EntitySwitch>
-      <EntitySwitch.Case if={isNewRelicDashboardAvailable}>
-        <Grid item md={6} xs={12}>
-          <EntityNewRelicDashboardCard />
-        </Grid>
-      </EntitySwitch.Case>
+
     </EntitySwitch>
 
     <Grid item md={4} xs={12}>
@@ -395,31 +308,15 @@ const overviewContent = (
     {cicdCard}
 
     <EntitySwitch>
-      <EntitySwitch.Case if={isGithubInsightsAvailable}>
-        <Grid item md={6}>
-          <EntityGithubInsightsLanguagesCard />
-          <EntityGithubInsightsReleasesCard />
-        </Grid>
-        <Grid item md={6}>
-          <EntityGithubInsightsReadmeCard maxHeight={350} />
-        </Grid>
-      </EntitySwitch.Case>
+      
     </EntitySwitch>
 
     <EntitySwitch>
-      <EntitySwitch.Case if={isLighthouseAvailable}>
-        <Grid item sm={4}>
-          <EntityLastLighthouseAuditCard variant="gridItem" />
-        </Grid>
-      </EntitySwitch.Case>
+     
     </EntitySwitch>
 
     <EntitySwitch>
-      <EntitySwitch.Case if={isGithubPullRequestsAvailable}>
-        <Grid item sm={4}>
-          <EntityGithubPullRequestsOverviewCard />
-        </Grid>
-      </EntitySwitch.Case>
+     
     </EntitySwitch>
 
     <EntitySwitch>
@@ -476,13 +373,7 @@ const serviceEntityPage = (
       {techdocsContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route
-      if={isNewRelicDashboardAvailable}
-      path="/newrelic-dashboard"
-      title="New Relic Dashboard"
-    >
-      <EntityNewRelicDashboardContent />
-    </EntityLayout.Route>
+  
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent />
@@ -492,9 +383,7 @@ const serviceEntityPage = (
       {pullRequestsContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/code-insights" title="Code Insights">
-      <EntityGithubInsightsContent />
-    </EntityLayout.Route>
+   
 
     <EntityLayout.Route path="/tech-insights" title="Scorecards">
       <Grid container spacing={3} alignItems="stretch">
@@ -514,9 +403,7 @@ const serviceEntityPage = (
       </Grid>
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/code-coverage" title="Code Coverage">
-      <EntityCodeCoverageContent />
-    </EntityLayout.Route>
+
 
     <EntityLayout.Route path="/kafka" title="Kafka">
       <EntityKafkaContent />
@@ -530,13 +417,7 @@ const serviceEntityPage = (
       <EntityCostInsightsContent />
     </EntityLayout.Route>
 
-    <EntityLayout.Route
-      path="/dynatrace"
-      title="Dynatrace"
-      if={isDynatraceAvailable}
-    >
-      <DynatraceTab />
-    </EntityLayout.Route>
+
 
     <EntityLayout.Route path="/feedback" title="Feedback">
       <EntityFeedbackResponseContent />
@@ -554,9 +435,7 @@ const websiteEntityPage = (
       {cicdContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/lighthouse" title="Lighthouse">
-      <EntityLighthouseContent />
-    </EntityLayout.Route>
+
 
     <EntityLayout.Route path="/errors" title="Errors">
       {errorsContent}
@@ -577,45 +456,23 @@ const websiteEntityPage = (
       {techdocsContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route
-      if={isNewRelicDashboardAvailable}
-      path="/newrelic-dashboard"
-      title="New Relic Dashboard"
-    >
-      <EntityNewRelicDashboardContent />
-    </EntityLayout.Route>
+
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent />
     </EntityLayout.Route>
 
-    <EntityLayout.Route
-      path="/dynatrace"
-      title="Dynatrace"
-      if={isDynatraceAvailable}
-    >
-      <DynatraceTab />
-    </EntityLayout.Route>
 
-    <EntityLayout.Route
-      if={isAzureDevOpsAvailable}
-      path="/git-tags"
-      title="Git Tags"
-    >
-      <EntityAzureGitTagsContent />
-    </EntityLayout.Route>
+
+
 
     <EntityLayout.Route path="/pull-requests" title="Pull Requests">
       {pullRequestsContent}
     </EntityLayout.Route>
 
-    <EntityLayout.Route path="/code-insights" title="Code Insights">
-      <EntityGithubInsightsContent />
-    </EntityLayout.Route>
 
-    <EntityLayout.Route path="/code-coverage" title="Code Coverage">
-      <EntityCodeCoverageContent />
-    </EntityLayout.Route>
+
+
 
     <EntityLayout.Route path="/todos" title="TODOs">
       <EntityTodoContent />
@@ -853,13 +710,7 @@ const resourcePage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
-    <EntityLayout.Route
-      path="/puppetdb"
-      title="Puppet"
-      if={isPuppetDbAvailable}
-    >
-      <PuppetDbPage />
-    </EntityLayout.Route>
+    
     <EntityLayout.Route path="/todos" title="TODOs">
       <EntityTodoContent />
     </EntityLayout.Route>
