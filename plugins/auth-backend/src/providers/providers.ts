@@ -33,6 +33,11 @@ import { saml } from './saml';
 import { AuthProviderFactory } from './types';
 import { bitbucketServer } from './bitbucketServer';
 import { easyAuth } from './azure-easyauth';
+import {
+  DEFAULT_NAMESPACE,
+  stringifyEntityRef,
+} from '@backstage/catalog-model';
+
 
 /**
  * All built-in auth provider integrations.
@@ -77,6 +82,49 @@ export const defaultAuthProviderFactories: {
   microsoft: microsoft.create(),
   easyAuth: easyAuth.create(),
   oauth2: oauth2.create(),
+  oauth2Proxy: oauth2Proxy.create({
+    signIn: {
+      async resolver({ result }, ctx) {
+        var headers = result.headers;
+        
+        console.debug("Headers--------------------------------------------------------------------");
+        console.debug(JSON.stringify(headers,null,2));
+
+        const name = result.getHeader('X-Forwarded-Preferred-Username');
+        console.debug("Resolver started with " + name);
+                    
+        console.debug("Cluster GUID: " + process.env.CLUSTERGUID);
+        
+        if (typeof name === "undefined" || name == "undefined") {
+          throw new Error('Request did not contain a user');
+        }
+
+        try {
+          // Attempts to sign in existing user
+          const signedInUser = await ctx.signInWithCatalogUser({
+            entityRef: { name },
+          });
+
+          return Promise.resolve(signedInUser);
+        } catch (e) {
+          // Create stub user
+          const userEntityRef = stringifyEntityRef({
+            kind: 'User',
+            name: name,
+            namespace: DEFAULT_NAMESPACE,
+          });
+          return ctx.issueToken({
+            claims: {
+              sub: userEntityRef,
+              ent: [userEntityRef],
+            },
+          });
+        }
+      },
+    },
+  }
+
+  ),
   oidc: oidc.create(),
   onelogin: onelogin.create(),
   awsalb: awsAlb.create(),

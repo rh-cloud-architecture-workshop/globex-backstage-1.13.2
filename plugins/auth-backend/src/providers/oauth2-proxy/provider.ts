@@ -99,6 +99,7 @@ export class Oauth2ProxyAuthProvider<JWTPayload>
     this.resolverContext = options.resolverContext;
     this.signInResolver = options.signInResolver;
     this.authHandler = options.authHandler;
+    console.log("------------------ Oauth2ProxyAuthProvider Constructor --------------------");
   }
 
   frameHandler(): Promise<void> {
@@ -111,7 +112,7 @@ export class Oauth2ProxyAuthProvider<JWTPayload>
       const authHeader = req.header(OAUTH2_PROXY_JWT_HEADER);
       const jwt = getBearerTokenFromAuthorizationHeader(authHeader);
       const decodedJWT = jwt && (decodeJwt(jwt) as unknown as JWTPayload);
-
+      console.log("------------------ Oauth2ProxyAuthProvider refresh --------------------");
       const result = {
         fullProfile: decodedJWT || ({} as JWTPayload),
         accessToken: jwt || '',

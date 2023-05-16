@@ -31,7 +31,7 @@ import { AppRouter, FeatureFlagged, FlatRoutes } from '@backstage/core-app-api';
 import {
   AlertDisplay,
   OAuthRequestDialog,
-  SignInPage,
+  SignInPage, ProxiedSignInPage,
 } from '@backstage/core-components';
 import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
 import { AzurePullRequestsPage } from '@backstage/plugin-azure-devops';
@@ -97,7 +97,7 @@ import {
 } from './components/scaffolder/customScaffolderExtensions';
 import { defaultPreviewTemplate } from './components/scaffolder/defaultPreviewTemplate';
 import { searchPage } from './components/search/SearchPage';
-import { providers } from './identityProviders';
+//import { providers } from './identityProviders';
 import * as plugins from './plugins';
 
 import { techDocsPage } from './components/techdocs/TechDocsPage';
@@ -109,6 +109,10 @@ import { TwoColumnLayout } from './components/scaffolder/customScaffolderLayouts
 import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
 import { StackstormPage } from '@backstage/plugin-stackstorm';
 import { PuppetDbPage } from '@backstage/plugin-puppetdb';
+import { githubAuthApiRef } from '@backstage/core-plugin-api';
+//import { SignInPage } from '@backstage/core-components';
+
+
 
 const app = createApp({
   apis,
@@ -126,14 +130,24 @@ const app = createApp({
   ],
   components: {
     SignInPage: props => {
-      return (
-        <SignInPage
-          {...props}
-          providers={['guest', 'custom', ...providers]}
-          title="Select a sign-in method"
-          align="center"
-        />
-      );
+      const nodeEnv = process.env.NODE_ENV;
+      
+      console.debug("ENV: " + nodeEnv);
+      if (nodeEnv === 'development') {
+        return (
+          <SignInPage
+              {...props}
+              auto
+              provider={{
+                id: 'github-auth-provider',
+                title: 'GitHub',
+                message: 'Sign in using GitHub',
+                apiRef: githubAuthApiRef,
+              }}
+            />
+        );
+      }
+      return <ProxiedSignInPage {...props} provider="oauth2Proxy" />;
     },
   },
   bindRoutes({ bind }) {
